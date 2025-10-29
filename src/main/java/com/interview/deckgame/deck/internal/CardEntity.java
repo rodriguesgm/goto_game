@@ -1,5 +1,6 @@
 package com.interview.deckgame.deck.internal;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -24,10 +25,12 @@ public class CardEntity {
     @Enumerated(EnumType.STRING)
     private Suit suit;
 
+    private Integer rankValue;
+
+    @Column(name="number_value")
     @Enumerated(EnumType.STRING)
     private Value value;
 
-    private int rankValue;
 
     public enum Suit {HEARTS, SPADES, CLUBS, DIAMONDS}
 

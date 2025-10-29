@@ -26,8 +26,8 @@ public class GameDeckController {
     }
 
     @PostMapping("/shuffle")
-    public void shuffleDecks(@PathVariable String gameId) {
-        // TODO - shuffle all decks of the game
+    public void shuffleDecks(@PathVariable Long gameId) {
+        gameService.shuffle(gameId);
     }
 
     public record AddDeckRequest(Long deckId) {

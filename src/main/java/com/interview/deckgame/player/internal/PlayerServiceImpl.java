@@ -1,5 +1,7 @@
 package com.interview.deckgame.player.internal;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import com.interview.deckgame.game.internal.GameEntity;
@@ -28,5 +30,16 @@ public class PlayerServiceImpl implements PlayerService {
         }
         player.setGame(null);
         playerRepository.save(player);
+    }
+
+    @Override
+    public Optional<PlayerEntity> findById(Long playerId) {
+        return playerRepository.findById(playerId);
+    }
+
+    public PlayerEntity create(String name) {
+        final var player = new PlayerEntity();
+        player.setName(name);
+        return playerRepository.save(player);
     }
 }
