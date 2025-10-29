@@ -30,4 +30,7 @@ public class GameEntity {
 
     @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<GameDeckEntity> gameDecks = new ArrayList<>();
+
+    @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<DealtCardEntity> dealtCards = new ArrayList<>();
 }

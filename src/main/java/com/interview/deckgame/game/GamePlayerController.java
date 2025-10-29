@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.interview.deckgame.game.internal.GameService;
+import com.interview.deckgame.game.internal.GamePlayerService;
 import com.interview.deckgame.game.model.CardDto;
 import com.interview.deckgame.game.model.CardMapper;
 
@@ -22,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/games/{gameId}/players")
 public class GamePlayerController {
 
-    private final GameService gameService;
+    private final GamePlayerService gamePlayerService;
     private final CardMapper cardMapper;
 
     @GetMapping
@@ -32,7 +32,7 @@ public class GamePlayerController {
 
     @PostMapping
     public void addPlayer(@PathVariable Long gameId, @RequestBody AddPlayerRequest request) {
-        gameService.addPlayer(gameId, request.playerId());
+        gamePlayerService.addPlayer(gameId, request.playerId());
     }
 
     @GetMapping("/{playerId}/cards")
@@ -43,14 +43,14 @@ public class GamePlayerController {
     @GetMapping("/{playerId}/cards/deal")
     public List<CardDto> dealCard(@PathVariable Long gameId, @RequestBody AddPlayerRequest request) {
         int numOfCards = ObjectUtils.defaultIfNull(request.numberOfCards(), 1);
-        return gameService.dealCards(gameId, request.playerId(), numOfCards).stream()
+        return gamePlayerService.dealCards(gameId, request.playerId(), numOfCards).stream()
                 .map(cardMapper::toDto)
                 .toList();
     }
 
     @DeleteMapping("/{playerId}")
     public void removePlayer(@PathVariable Long gameId, @PathVariable Long playerId) {
-        gameService.removePlayer(gameId, playerId);
+        gamePlayerService.removePlayer(gameId, playerId);
     }
 
     public record AddPlayerRequest(Long playerId, Integer numberOfCards) {
