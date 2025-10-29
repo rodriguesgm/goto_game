@@ -1,7 +1,5 @@
 package com.interview.deckgame.game;
 
-import java.util.UUID;
-
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,16 +21,16 @@ public class GameDeckController {
     private final GameService gameService;
 
     @PostMapping
-    public GameDto addDeck(@PathVariable UUID gameId, @RequestBody AddDeckRequest deck) {
+    public GameDto addDeck(@PathVariable Long gameId, @RequestBody AddDeckRequest deck) {
         return gameMapper.toDto(gameService.addDeck(gameId, deck.deckId));
     }
 
     @PostMapping("/shuffle")
     public void shuffleDecks(@PathVariable String gameId) {
-
+        // TODO - shuffle all decks of the game
     }
 
-    public record AddDeckRequest(UUID deckId) {
+    public record AddDeckRequest(Long deckId) {
 
     }
 }

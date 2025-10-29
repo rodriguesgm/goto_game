@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-10-29T16:53:52-0400",
+    date = "2025-10-29T18:18:38-0400",
     comments = "version: 1.6.3, compiler: javac, environment: Java 24.0.1 (Oracle Corporation)"
 )
 @Component
@@ -21,7 +21,7 @@ public class GameMapperImpl implements GameMapper {
         String id = null;
 
         if ( gameEntity.getId() != null ) {
-            id = gameEntity.getId().toString();
+            id = String.valueOf( gameEntity.getId() );
         }
 
         GameDto gameDto = new GameDto( id );

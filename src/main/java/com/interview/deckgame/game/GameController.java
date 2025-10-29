@@ -1,11 +1,10 @@
 package com.interview.deckgame.game;
 
-import java.util.UUID;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,14 +23,16 @@ public class GameController {
     private final GameMapper gameMapper;
 
     @PostMapping
-    public GameDto create() {
-        return gameMapper.toDto(gameService.create());
+    public GameDto create(@RequestBody GameCreateRequest request) {
+        return gameMapper.toDto(gameService.create(request.name));
     }
 
     @DeleteMapping("/{gameId}")
-    public ResponseEntity<Void> delete(@PathVariable UUID gameId) {
+    public ResponseEntity<Void> delete(@PathVariable Long gameId) {
         gameService.delete(gameId);
         return ResponseEntity.noContent().build();
     }
 
+    public record GameCreateRequest(String name) {
+    }
 }

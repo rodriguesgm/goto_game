@@ -1,7 +1,5 @@
 package com.interview.deckgame.game;
 
-import java.util.UUID;
-
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,17 +20,21 @@ public class GamePlayerController {
     private final GameService gameService;
 
     @GetMapping
-    public void getPlayers(@PathVariable UUID gameId) {
+    public void getPlayers(@PathVariable Long gameId) {
+        // TODO - get all players of the game
     }
 
 
     @PostMapping
-    public void addPlayer(@PathVariable UUID gameId, @RequestBody UUID player) {
-        gameService.addPlayer(gameId, player);
+    public void addPlayer(@PathVariable Long gameId, @RequestBody AddPlayerRequest request) {
+        gameService.addPlayer(gameId, request.playerId());
     }
 
     @DeleteMapping("/{playerId}")
-    public void removePlayer(@PathVariable UUID gameId, @RequestBody UUID playerId) {
+    public void removePlayer(@PathVariable Long gameId, @PathVariable Long playerId) {
         gameService.removePlayer(gameId, playerId);
+    }
+
+    public record AddPlayerRequest(Long playerId) {
     }
 }
