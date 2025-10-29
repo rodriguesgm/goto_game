@@ -1,0 +1,16 @@
+/Users/guilherme.rodrigues/Documents/Projects/temp/goto_game/src/main/java/com/interview/deckgame/DeckGameApplication.java
+/Users/guilherme.rodrigues/Documents/Projects/temp/goto_game/src/main/java/com/interview/deckgame/deck/DeckController.java
+/Users/guilherme.rodrigues/Documents/Projects/temp/goto_game/src/main/java/com/interview/deckgame/deck/internal/CardEntity.java
+/Users/guilherme.rodrigues/Documents/Projects/temp/goto_game/src/main/java/com/interview/deckgame/deck/internal/DeckEntity.java
+/Users/guilherme.rodrigues/Documents/Projects/temp/goto_game/src/main/java/com/interview/deckgame/deck/internal/DeckService.java
+/Users/guilherme.rodrigues/Documents/Projects/temp/goto_game/src/main/java/com/interview/deckgame/deck/model/DeckDto.java
+/Users/guilherme.rodrigues/Documents/Projects/temp/goto_game/src/main/java/com/interview/deckgame/deck/model/DeckMapper.java
+/Users/guilherme.rodrigues/Documents/Projects/temp/goto_game/src/main/java/com/interview/deckgame/game/GameController.java
+/Users/guilherme.rodrigues/Documents/Projects/temp/goto_game/src/main/java/com/interview/deckgame/game/GameDeckController.java
+/Users/guilherme.rodrigues/Documents/Projects/temp/goto_game/src/main/java/com/interview/deckgame/game/GamePlayerController.java
+/Users/guilherme.rodrigues/Documents/Projects/temp/goto_game/src/main/java/com/interview/deckgame/game/internal/GameEntity.java
+/Users/guilherme.rodrigues/Documents/Projects/temp/goto_game/src/main/java/com/interview/deckgame/game/internal/GameRepository.java
+/Users/guilherme.rodrigues/Documents/Projects/temp/goto_game/src/main/java/com/interview/deckgame/game/internal/GameService.java
+/Users/guilherme.rodrigues/Documents/Projects/temp/goto_game/src/main/java/com/interview/deckgame/game/model/GameDto.java
+/Users/guilherme.rodrigues/Documents/Projects/temp/goto_game/src/main/java/com/interview/deckgame/game/model/GameMapper.java
+/Users/guilherme.rodrigues/Documents/Projects/temp/goto_game/src/main/java/com/interview/deckgame/player/PlayerController.java
