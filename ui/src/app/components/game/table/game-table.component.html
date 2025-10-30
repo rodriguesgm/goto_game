@@ -10,9 +10,12 @@
 
       </div>
 
-      <div class="player" *ngFor="let player of players">
-        {{player.playerName}} ({{player.score}})
+      <div class="players">
+        <div class="player" *ngFor="let player of players">
+          {{player.playerName}} ({{player.score}})
+        </div>
       </div>
+
     </div>
   </div>
 </div>

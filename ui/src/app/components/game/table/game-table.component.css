@@ -30,9 +30,13 @@
 }
 
 /* Player positions around the table */
+.players {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .player {
-  position: absolute;
-  width: 60px;
+  width: 98px;
   height: 30px;
   border: 1px solid #888;
   border-radius: 15px;
@@ -40,33 +44,4 @@
   line-height: 30px;
   text-align: center;
   font-size: 12px;
-}
-
-.player1 {
-  top: -20px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.player2 {
-  top: 40%;
-  right: -40px;
-  transform: translateY(-50%);
-}
-
-.player3 {
-  bottom: -20px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.player4 {
-  top: 40%;
-  left: -40px;
-  transform: translateY(-50%);
-}
-
-.player5 {
-  top: 10%;
-  left: 10%;
 }
