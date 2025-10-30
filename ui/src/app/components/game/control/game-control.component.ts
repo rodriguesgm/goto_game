@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ControlButton, ControlPanelComponent } from '../../shared/components/control-panel/control-panel.component';
+import { GameService } from '../../../services/game.service';
 
 @Component({
   selector: 'game-control',
@@ -22,6 +23,10 @@ export class GameControlComponent {
     { label: 'Add deck', action: 'addDeck' },
     { label: 'Add player', action: 'addPlayer' }
   ];
+
+  constructor(private gameService: GameService) {
+
+  }
 
   onControlAction(action: string) {
     switch (action) {
@@ -57,7 +62,11 @@ export class GameControlComponent {
     }
   }
 
-  private addGame() { console.log('Add game'); }
+  private addGame() {
+    // TODO: goto: Should open a modal to get game name
+    this.gameService.create({ name: 'Game ' }).subscribe(t => console.log(t));
+  }
+
   private deleteGame() { console.log('Delete game'); }
   private shuffleDeck() { console.log('Shuffle deck'); }
   private removePlayer() { console.log('Remove player'); }

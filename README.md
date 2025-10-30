@@ -52,4 +52,5 @@ npm run start
    - [ ] Views
    - [ ] Tests
    - [ ] Translations/I18n
+   - [ ] Error handling and message
   
