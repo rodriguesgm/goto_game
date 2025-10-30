@@ -2,5 +2,5 @@ package com.interview.deckgame.game.internal;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface GameRepository extends CrudRepository<GameEntity, Long> {
+ interface GameRepository extends CrudRepository<GameEntity, Long> {
 }

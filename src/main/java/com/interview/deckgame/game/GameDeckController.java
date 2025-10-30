@@ -34,7 +34,8 @@ public class GameDeckController {
         gameDeckService.shuffle(gameId);
     }
 
-    @GetMapping("/{gameId}/cards/suit-counts")
+    // TODO = irc, the rest endpoint in here is kind of weird
+    @GetMapping("/cards/suit-counts")
     public Map<CardEntity.Suit, Long> suitCounts(@PathVariable Long gameId) {
         return gameDeckService.countRemainingBySuit(gameId);
     }
