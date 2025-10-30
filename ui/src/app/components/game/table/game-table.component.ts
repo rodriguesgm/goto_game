@@ -4,6 +4,7 @@ import { GamePlayerService } from '../../../services/game-player.service';
 import { GamePlayer } from '../../../models/game-player.model';
 import { CommonModule } from '@angular/common';
 import { ControlButton, ControlPanelComponent } from '../../shared/components/control-panel/control-panel.component';
+import { GameDeckService } from '../../../services/game-deck.service';
 
 @Component({
   selector: 'goto-game-table',
@@ -23,6 +24,7 @@ export class GameTableComponent {
     { label: 'Add deck', action: 'addDeck' },
     { label: 'Add player', action: 'addPlayer' },
     { label: 'Shuffle deck', action: 'shuffleDeck' },
+    // TODO: goto: We could disable some actions if the game is not in the state to be executed. Like, can not deal card before shuffling the deck
     { label: 'Deal card', action: 'dealCard' },
     { label: 'Count suits', action: 'countSuits' },
     { label: 'Remove player', action: 'removePlayer' },
@@ -30,7 +32,9 @@ export class GameTableComponent {
   ];
 
   constructor(
-    private gamePlayerService: GamePlayerService) { }
+    private gamePlayerService: GamePlayerService,
+    private gameDeckService: GameDeckService,
+  ) { }
 
   @Input({ required: true })
   set game(value: Game) {
@@ -73,11 +77,22 @@ export class GameTableComponent {
   }
 
   private deleteGame() { console.log('Delete game'); }
-  private shuffleDeck() { console.log('Shuffle deck'); }
+
+  private shuffleDeck() {
+    this.gameDeckService.shuffleDeck(this._game.id).subscribe(() => console.log('Decks shuffled'));
+  }
+
   private removePlayer() { console.log('Remove player'); }
   private dealCard() { console.log('Deal card'); }
   private countSuits() { console.log('Count suits'); }
-  private addDeck() { console.log('Add deck to game'); }
+
+  private addDeck() {
+    // TODO: goto: better modal input
+    const result = window.prompt('Please enter the player id:');
+    if (result !== null && result.trim() !== '') {
+      this.gameDeckService.addDeck(this._game.id, Number(result)).subscribe(() => console.log('Deck added'));
+    }
+  }
 
   private addPlayer() {
     // TODO: goto: better modal input
@@ -85,7 +100,6 @@ export class GameTableComponent {
     if (result !== null && result.trim() !== '') {
       this.gamePlayerService.addPlayer(this._game.id, Number(result)).subscribe(newPlayer => this.players.push(newPlayer));
     }
-
   }
 
   private listPlayers(name: Game) {

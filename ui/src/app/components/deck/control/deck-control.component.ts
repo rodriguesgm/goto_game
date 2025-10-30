@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ControlButton, ControlPanelComponent } from '../../shared/components/control-panel/control-panel.component';
+import { DeckService } from '../../../services/deck.service';
 
 @Component({
   selector: 'goto-deck-control',
@@ -16,6 +17,8 @@ export class DeckControlComponent {
     { label: 'Add', action: 'addDeck' },
   ];
 
+  constructor(private deckService: DeckService) { }
+
   onControlAction(action: string) {
     switch (action) {
       case 'addDeck':
@@ -26,6 +29,10 @@ export class DeckControlComponent {
     }
   }
 
-  private addDeck() { console.log('Add deck'); }
+  private addDeck() {
+    // TODO: goto: Should open a modal to get deck name
+    const deckSeq = Math.floor(Math.random() * (10000 - 1)) + 1;
+    this.deckService.create({ name: 'Deck ' + deckSeq }).subscribe(t => console.log(t));;
+  }
 
 }
