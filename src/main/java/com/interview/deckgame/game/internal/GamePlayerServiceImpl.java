@@ -56,6 +56,7 @@ public class GamePlayerServiceImpl implements GamePlayerService {
     public List<CardEntity> dealCards(Long gameId, Long playerId, int count) {
         // TODO = validate that player is part of the game
         // TODO = validate that player deck is shuffled before dealing cards
+        // TODO = concurrency handling to avoid dealing the same card to multiple/same players, multiple requests etc.
 
         if (count == 0) {
             return Collections.emptyList();

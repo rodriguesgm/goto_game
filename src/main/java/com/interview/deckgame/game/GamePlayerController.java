@@ -16,6 +16,7 @@ import com.interview.deckgame.game.model.CardDto;
 import com.interview.deckgame.game.model.CardMapper;
 import com.interview.deckgame.game.model.GameMapper;
 import com.interview.deckgame.game.model.PlayerScoreDto;
+import com.interview.deckgame.security.ValidateApplicationToken;
 
 import lombok.RequiredArgsConstructor;
 
@@ -29,6 +30,7 @@ public class GamePlayerController {
     private final GameMapper gameMapper;
 
     @GetMapping
+    @ValidateApplicationToken
     public List<PlayerScoreDto> getPlayers(@PathVariable Long gameId) {
         return gamePlayerService.getPlayers(gameId).entrySet()
                 .stream()
@@ -37,11 +39,13 @@ public class GamePlayerController {
     }
 
     @PostMapping
+    @ValidateApplicationToken
     public void addPlayer(@PathVariable Long gameId, @RequestBody AddPlayerRequest request) {
         gamePlayerService.addPlayer(gameId, request.playerId());
     }
 
     @GetMapping("/{playerId}/cards/deal")
+    @ValidateApplicationToken
     public List<CardDto> dealCards(@PathVariable Long gameId, @PathVariable Long playerId, @RequestBody DealCardsRequest request) {
         int numOfCards = ObjectUtils.defaultIfNull(request.numberOfCards(), 1);
         return gamePlayerService.dealCards(gameId, playerId, numOfCards).stream()
@@ -50,6 +54,7 @@ public class GamePlayerController {
     }
 
     @DeleteMapping("/{playerId}")
+    @ValidateApplicationToken
     public void removePlayer(@PathVariable Long gameId, @PathVariable Long playerId) {
         gamePlayerService.removePlayer(gameId, playerId);
     }

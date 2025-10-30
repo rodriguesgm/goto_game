@@ -15,6 +15,7 @@ import com.interview.deckgame.game.model.CardMapper;
 import com.interview.deckgame.player.internal.PlayerServiceImpl;
 import com.interview.deckgame.player.model.PlayerDto;
 import com.interview.deckgame.player.model.PlayerMapper;
+import com.interview.deckgame.security.ValidateApplicationToken;
 
 import lombok.RequiredArgsConstructor;
 
@@ -29,11 +30,13 @@ public class PlayerController {
     private final CardMapper cardMapper;
 
     @PostMapping
+    @ValidateApplicationToken
     public PlayerDto create(@RequestBody PlayerCreateRequest request) {
         return playerMapper.toDto(playerService.create(request.name));
     }
 
     @GetMapping("/{playerId}/cards")
+    @ValidateApplicationToken
     public List<CardDto> getPlayerCards(@PathVariable Long playerId) {
         return gamePlayerService.getPlayerCards(playerId).stream()
                 .map(cardMapper::toDto)

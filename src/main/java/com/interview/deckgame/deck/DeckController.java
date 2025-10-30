@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.interview.deckgame.deck.internal.DeckServiceImpl;
 import com.interview.deckgame.deck.model.DeckDto;
 import com.interview.deckgame.deck.model.DeckMapper;
+import com.interview.deckgame.security.ValidateApplicationToken;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,6 +21,7 @@ public class DeckController {
     private final DeckMapper deckMapper;
 
     @PostMapping
+    @ValidateApplicationToken
     public DeckDto create(@RequestBody DeckCreateRequest request) {
         return deckMapper.toDto(
                 deckService.newDeck(request.name)

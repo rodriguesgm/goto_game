@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.interview.deckgame.game.internal.GameService;
 import com.interview.deckgame.game.model.GameDto;
 import com.interview.deckgame.game.model.GameMapper;
+import com.interview.deckgame.security.ValidateApplicationToken;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,11 +23,13 @@ public class GameController {
     private final GameService gameService;
     private final GameMapper gameMapper;
 
+    @ValidateApplicationToken
     @PostMapping
     public GameDto create(@RequestBody GameCreateRequest request) {
         return gameMapper.toDto(gameService.create(request.name));
     }
 
+    @ValidateApplicationToken
     @DeleteMapping("/{gameId}")
     public ResponseEntity<Void> delete(@PathVariable Long gameId) {
         gameService.delete(gameId);
