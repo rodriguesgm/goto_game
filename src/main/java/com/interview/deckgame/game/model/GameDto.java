@@ -1,5 +1,5 @@
 package com.interview.deckgame.game.model;
 
 
-public record GameDto(Long id) {
+public record GameDto(Long id, String name) {
 }

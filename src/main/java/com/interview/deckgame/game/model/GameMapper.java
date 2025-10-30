@@ -10,7 +10,6 @@ import com.interview.deckgame.player.internal.PlayerEntity;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface GameMapper {
 
-    @Mapping(target = "id")
     GameDto toDto(GameEntity gameEntity);
 
     @Mapping(target = "playerName", source = "player.name")
