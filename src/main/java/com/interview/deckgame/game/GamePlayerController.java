@@ -42,9 +42,9 @@ public class GamePlayerController {
     }
 
     @GetMapping("/{playerId}/cards/deal")
-    public List<CardDto> dealCards(@PathVariable Long gameId, @RequestBody DealCardsRequest request) {
+    public List<CardDto> dealCards(@PathVariable Long gameId, @PathVariable Long playerId, @RequestBody DealCardsRequest request) {
         int numOfCards = ObjectUtils.defaultIfNull(request.numberOfCards(), 1);
-        return gamePlayerService.dealCards(gameId, request.playerId(), numOfCards).stream()
+        return gamePlayerService.dealCards(gameId, playerId, numOfCards).stream()
                 .map(cardMapper::toDto)
                 .toList();
     }
@@ -57,6 +57,6 @@ public class GamePlayerController {
     public record AddPlayerRequest(Long playerId) {
     }
 
-    public record DealCardsRequest(Long playerId, Integer numberOfCards) {
+    public record DealCardsRequest(Integer numberOfCards) {
     }
 }
