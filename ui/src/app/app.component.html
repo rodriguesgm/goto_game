@@ -15,7 +15,19 @@
       </div>
 
       <!-- Game area -->
-      <game-table></game-table>
+      <div>
+        <div>
+          <button (click)="reloadTables()">
+            <!-- TODO: goto: This could be automatically, so when some action in controlls execute we just refresh the specific game affected -->
+            Reload
+          </button>
+
+          <div *ngFor="let game of games">
+            <game-table [game]="game"></game-table>
+          </div>
+
+        </div>
+      </div>
 
     </div>
   </div>

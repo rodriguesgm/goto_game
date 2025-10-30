@@ -64,7 +64,8 @@ export class GameControlComponent {
 
   private addGame() {
     // TODO: goto: Should open a modal to get game name
-    this.gameService.create({ name: 'Game ' }).subscribe(t => console.log(t));
+    const gameSeq = Math.floor(Math.random() * (1000 - 1)) + 1;
+    this.gameService.create({ name: 'Game ' + gameSeq }).subscribe(t => console.log(t));
   }
 
   private deleteGame() { console.log('Delete game'); }

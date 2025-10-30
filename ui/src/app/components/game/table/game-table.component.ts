@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Game } from '../../../models/game.model';
 
 @Component({
   selector: 'game-table',
@@ -8,4 +9,5 @@ import { Component } from '@angular/core';
 })
 export class GameTableComponent {
 
+  @Input({ required: true }) game!: Game;
 }

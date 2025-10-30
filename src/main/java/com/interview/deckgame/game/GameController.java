@@ -1,7 +1,11 @@
 package com.interview.deckgame.game;
 
+import java.util.List;
+import java.util.stream.StreamSupport;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,6 +31,14 @@ public class GameController {
     @PostMapping
     public GameDto create(@RequestBody GameCreateRequest request) {
         return gameMapper.toDto(gameService.create(request.name));
+    }
+
+    @ValidateApplicationToken
+    @GetMapping
+    public List<GameDto> list() {
+        return StreamSupport.stream(gameService.list().spliterator(), false)
+                .map(gameMapper::toDto)
+                .toList();
     }
 
     @ValidateApplicationToken

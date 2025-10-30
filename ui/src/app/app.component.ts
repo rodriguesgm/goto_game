@@ -4,6 +4,9 @@ import { PlayerControlComponent } from './components/player/control/player-contr
 import { DeckControlComponent } from './components/deck/control/deck-control.component';
 import { GameControlComponent } from './components/game/control/game-control.component';
 import { GameTableComponent } from './components/game/table/game-table.component';
+import { Game } from './models/game.model';
+import { CommonModule } from '@angular/common';
+import { GameService } from './services/game.service';
 
 @Component({
   selector: 'app-root',
@@ -13,8 +16,8 @@ import { GameTableComponent } from './components/game/table/game-table.component
     GameControlComponent,
     GameTableComponent,
     PlayerControlComponent,
-
     // Angular
+    CommonModule,
     RouterOutlet,
   ],
   templateUrl: './app.component.html',
@@ -22,6 +25,13 @@ import { GameTableComponent } from './components/game/table/game-table.component
 })
 export class AppComponent {
   title = 'game-deck';
+  games: Game[] = [];
 
+  constructor(private gameService: GameService) {
 
+  }
+
+  reloadTables() {
+    this.gameService.list().subscribe(result => this.games = result);
+  }
 }

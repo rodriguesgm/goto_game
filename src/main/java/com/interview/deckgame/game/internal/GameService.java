@@ -10,6 +10,10 @@ public class GameService {
 
     private final GameRepository gameRepository;
 
+    public Iterable<GameEntity> list() {
+        return gameRepository.findAll();
+    }
+
     public GameEntity create(String gameName) {
         final var game = new GameEntity();
         game.setName(gameName);

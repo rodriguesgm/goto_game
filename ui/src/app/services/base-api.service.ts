@@ -12,7 +12,13 @@ export class BaseApiService {
   constructor(protected http: HttpClient) { }
 
   protected get<T>(endpoint: string, options?: object): Observable<T> {
-    return this.http.get<T>(`${this.baseUrl}/${endpoint}`, options);
+    const defaultHeaders = new HttpHeaders({
+      'ApplicationToken': 'default-token',
+    });
+    return this.http.get<T>(`${this.baseUrl}/${endpoint}`, {
+      headers: defaultHeaders,
+      ...options
+    });
   }
 
   protected post<T>(endpoint: string, body: any, options?: object): Observable<T> {

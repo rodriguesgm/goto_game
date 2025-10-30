@@ -11,4 +11,8 @@ export class GameService extends BaseApiService {
   create(payload: Omit<Game, 'id'>): Observable<Game> {
     return this.post<Game>('games', payload);
   }
+
+  list(): Observable<Game[]> {
+    return this.get<Game[]>('games');
+  }
 }
