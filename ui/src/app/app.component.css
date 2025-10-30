@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #888;
+  width: 800px;
+  margin: 20px auto;
+  font-family: Arial, sans-serif;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+}
+
+.control {
+  flex: 1;
+  border-right: 1px solid #ccc;
+  padding: 10px;
+}
+
+.control:last-child {
+  border-right: none;
+}

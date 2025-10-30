@@ -51,3 +51,5 @@ npm run start
  - [ ] Frontend
    - [ ] Views
    - [ ] Tests
+   - [ ] Translations/I18n
+  

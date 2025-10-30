@@ -1,0 +1,7 @@
+<div class="panel">
+  <h3>{{ title }}</h3>
+
+  <button *ngFor="let btn of buttons" (click)="onClick(btn.action)">
+    {{ btn.label }}
+  </button>
+</div>
