@@ -29,13 +29,14 @@ export class GameTableComponent {
     { label: 'Delete game', action: 'deleteGame' },
   ];
 
-  constructor(private gamePlayerService: GamePlayerService) { }
+  constructor(
+    private gamePlayerService: GamePlayerService) { }
 
   @Input({ required: true })
   set game(value: Game) {
     this._game = value;
 
-    this.createGameOnBackend(value);
+    this.listPlayers(value);
   }
 
   get game(): Game {
@@ -87,7 +88,9 @@ export class GameTableComponent {
 
   }
 
-  private createGameOnBackend(name: Game) {
-    this.gamePlayerService.listGamePlayers(this._game.id).subscribe(result => this.players = result);
+  private listPlayers(name: Game) {
+    this.gamePlayerService.listGamePlayers(this._game.id).subscribe(result => {
+      this.players = result
+    });
   }
 }

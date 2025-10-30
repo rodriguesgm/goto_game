@@ -35,7 +35,7 @@ export class PlayerControlComponent {
   private addPlayer() {
     // TODO: goto: Should open a modal to get player name
     const playerSeq = Math.floor(Math.random() * (10000 - 1)) + 1;
-    this.playerService.create({ name: 'Player ' + playerSeq });
+    this.playerService.create({ name: 'Player ' + playerSeq }).subscribe(t => console.log(t));;
   }
 
   private seeCards() { console.log('See cards'); }
