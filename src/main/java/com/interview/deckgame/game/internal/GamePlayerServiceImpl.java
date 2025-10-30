@@ -3,24 +3,54 @@ package com.interview.deckgame.game.internal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
 import com.interview.deckgame.deck.internal.CardEntity;
+import com.interview.deckgame.game.GamePlayerService;
 import com.interview.deckgame.player.PlayerService;
 import com.interview.deckgame.player.internal.PlayerEntity;
+import com.interview.deckgame.shared.CardRank;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
-public class GamePlayerService {
+public class GamePlayerServiceImpl implements GamePlayerService {
 
     private final GameRepository gameRepository;
     private final PlayerService playerService;
     private final DealtCardRepository dealtCardRepository;
+
+    public Map<PlayerEntity, Integer> getPlayers(Long gameId) {
+        final var playersInGame =
+                dealtCardRepository.findByGameIdAndPlayerIsNotNull(gameId).stream().map(DealtCardEntity::getPlayer).toList();
+
+        Map<PlayerEntity, Integer> totals = new HashMap<>();
+        for (PlayerEntity player : playersInGame) {
+            int sum = 0;
+            for (CardEntity c : getPlayerCards(player.getId())) {
+                sum += CardRank.rankFor((c.getValue()));
+            }
+            totals.put(player, sum);
+        }
+
+        // Sort descending by value
+        return totals.entrySet().stream()
+                .sorted(Map.Entry.<PlayerEntity, Integer>comparingByValue().reversed())
+                .collect(LinkedHashMap::new, (m, e) -> m.put(e.getKey(), e.getValue()), Map::putAll);
+
+    }
+
+    @Override
+    public List<CardEntity> getPlayerCards(Long playerId) {
+        return dealtCardRepository.findByPlayerId(playerId).stream().map(DealtCardEntity::getCard).toList();
+    }
 
     @Transactional
     public List<CardEntity> dealCards(Long gameId, Long playerId, int count) {

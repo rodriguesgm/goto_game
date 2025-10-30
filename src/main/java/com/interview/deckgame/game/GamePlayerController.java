@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.interview.deckgame.game.internal.GamePlayerService;
+import com.interview.deckgame.game.internal.GamePlayerServiceImpl;
 import com.interview.deckgame.game.model.CardDto;
 import com.interview.deckgame.game.model.CardMapper;
+import com.interview.deckgame.game.model.GameMapper;
+import com.interview.deckgame.game.model.PlayerScoreDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,12 +24,16 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/games/{gameId}/players")
 public class GamePlayerController {
 
-    private final GamePlayerService gamePlayerService;
+    private final GamePlayerServiceImpl gamePlayerService;
     private final CardMapper cardMapper;
+    private final GameMapper gameMapper;
 
     @GetMapping
-    public void getPlayers(@PathVariable Long gameId) {
-        // TODO - get all players of the game
+    public List<PlayerScoreDto> getPlayers(@PathVariable Long gameId) {
+        return gamePlayerService.getPlayers(gameId).entrySet()
+                .stream()
+                .map(entry -> gameMapper.toPlayerScoreDto(entry.getKey(), entry.getValue()))
+                .toList();
     }
 
     @PostMapping
@@ -35,13 +41,8 @@ public class GamePlayerController {
         gamePlayerService.addPlayer(gameId, request.playerId());
     }
 
-    @GetMapping("/{playerId}/cards")
-    public void getCards(@PathVariable Long gameId, @RequestBody AddPlayerRequest request) {
-        // Get the cards of a player
-    }
-
     @GetMapping("/{playerId}/cards/deal")
-    public List<CardDto> dealCard(@PathVariable Long gameId, @RequestBody AddPlayerRequest request) {
+    public List<CardDto> dealCards(@PathVariable Long gameId, @RequestBody DealCardsRequest request) {
         int numOfCards = ObjectUtils.defaultIfNull(request.numberOfCards(), 1);
         return gamePlayerService.dealCards(gameId, request.playerId(), numOfCards).stream()
                 .map(cardMapper::toDto)
@@ -53,6 +54,9 @@ public class GamePlayerController {
         gamePlayerService.removePlayer(gameId, playerId);
     }
 
-    public record AddPlayerRequest(Long playerId, Integer numberOfCards) {
+    public record AddPlayerRequest(Long playerId) {
+    }
+
+    public record DealCardsRequest(Long playerId, Integer numberOfCards) {
     }
 }

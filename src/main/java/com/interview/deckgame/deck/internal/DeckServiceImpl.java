@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.interview.deckgame.deck.DeckService;
+import com.interview.deckgame.shared.CardRank;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -44,20 +45,10 @@ public class DeckServiceImpl implements DeckService {
                 card.setDeck(deck);
                 card.setSuit(suit);
                 card.setValue(value);
-                card.setRankValue(rankFor(value));
+                card.setRankValue(CardRank.rankFor(value));
                 cards.add(card);
             }
         }
         return cards;
-    }
-
-    private int rankFor(CardEntity.Value v) {
-        return switch (v) {
-            case A -> 1;
-            case JACK -> 11;
-            case QUEEN -> 12;
-            case KING -> 13;
-            default -> v.ordinal() + 1;
-        };
     }
 }

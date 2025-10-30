@@ -1,6 +1,5 @@
 package com.interview.deckgame.game.internal;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -16,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class GameDeckService {
 
+    private static final Random random = new Random();
     private final GameRepository gameRepository;
     private final DeckService deckService;
     private final GameDeckRepository gameDeckRepository;
@@ -55,11 +55,12 @@ public class GameDeckService {
     @Transactional
     public void shuffle(Long gameId) {
         List<DealtCardEntity> undealt = dealtCardRepository.findByGameIdAndPlayerIsNull(gameId);
-        Random random = new Random();
+        for (int currentIndex = undealt.size() - 1; currentIndex > 0; currentIndex--) {
+            int positionToSwap = random.nextInt(currentIndex + 1);
 
-        for (int i = undealt.size() - 1; i > 0; i--) {
-            int j = random.nextInt(i + 1);
-            Collections.swap(undealt, i, j);
+            final var temp = undealt.get(positionToSwap);
+            undealt.set(positionToSwap, undealt.get(currentIndex));
+            undealt.set(currentIndex, temp);
         }
 
         // Persist the shuffled order
