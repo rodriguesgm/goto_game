@@ -81,11 +81,11 @@ public class GamePlayerServiceImpl implements GamePlayerService {
         return cards;
     }
 
-    public void addPlayer(Long gameId, Long playerId) {
+    public PlayerEntity addPlayer(Long gameId, Long playerId) {
         // TODO: goto: validate if player is already added to a game
 
         GameEntity game = gameRepository.findById(gameId).orElseThrow(() -> new EntityNotFoundException("Game with id %s not found".formatted(playerId)));
-        playerService.addToGame(playerId, game);
+        return playerService.addToGame(playerId, game);
     }
 
     public void removePlayer(Long gameId, Long playerId) {

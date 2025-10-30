@@ -4,13 +4,13 @@
       <!-- Controls Section -->
       <div class="controls">
         <div class="control">
-          <player-control></player-control>
+          <goto-player-control></goto-player-control>
         </div>
         <div class="control">
-          <deck-control></deck-control>
+          <goto-deck-control></goto-deck-control>
         </div>
         <div class="control">
-          <game-control></game-control>
+          <goto-game-control></goto-game-control>
         </div>
       </div>
 
@@ -23,7 +23,7 @@
           </button>
 
           <div *ngFor="let game of games">
-            <game-table [game]="game"></game-table>
+            <goto-game-table [game]="game"></goto-game-table>
           </div>
 
         </div>

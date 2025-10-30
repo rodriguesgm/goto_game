@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ControlButton, ControlPanelComponent } from '../../shared/components/control-panel/control-panel.component';
 
 @Component({
-  selector: 'player-control',
+  selector: 'goto-player-control',
   standalone: true,
   imports: [
     ControlPanelComponent

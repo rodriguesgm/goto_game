@@ -4,7 +4,11 @@
   position: relative;
 }
 
-.table {
+.table-area {
+  display: flex;
+}
+
+.table-players {
   position: relative;
   margin: 30px auto;
   width: 400px;

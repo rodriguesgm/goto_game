@@ -12,4 +12,10 @@ export class GamePlayerService extends BaseApiService {
   listGamePlayers(gameId: number): Observable<GamePlayer[]> {
     return this.get<GamePlayer[]>(`games/${gameId}/players`);
   }
+
+  addPlayer(gameId: number, playerId: number): Observable<GamePlayer> {
+    return this.post<GamePlayer>(`games/${gameId}/players`, {
+      playerId,
+    });
+  }
 }

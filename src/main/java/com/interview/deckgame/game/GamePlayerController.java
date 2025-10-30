@@ -41,8 +41,11 @@ public class GamePlayerController {
 
     @PostMapping
     @ValidateApplicationToken
-    public void addPlayer(@PathVariable Long gameId, @RequestBody AddPlayerRequest request) {
-        gamePlayerService.addPlayer(gameId, request.playerId());
+    public PlayerScoreDto addPlayer(@PathVariable Long gameId, @RequestBody AddPlayerRequest request) {
+        return gameMapper.toPlayerScoreDto(
+            gamePlayerService.addPlayer(gameId, request.playerId()),
+            0
+        );
     }
 
     @GetMapping("/{playerId}/cards/deal")

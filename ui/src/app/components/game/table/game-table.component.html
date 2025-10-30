@@ -1,8 +1,16 @@
 <div class="game-area">
   <h4>{{game.name}}</h4>
-  <div class="table">
-    <div class="center"></div>
+  <div class="table-area">
+    <div class="table-control">
+      <goto-control-panel [title]="''" [buttons]="controlButtons"
+        (buttonClick)="onControlAction($event)"></goto-control-panel>
+    </div>
+    <div class="table-players">
+      <div class="center">
 
-    <div class="player" *ngFor="let player of players">{{player.playerName}}</div>
+      </div>
+
+      <div class="player" *ngFor="let player of players">{{player.playerName}}</div>
+    </div>
   </div>
 </div>

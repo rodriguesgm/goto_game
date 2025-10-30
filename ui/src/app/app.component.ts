@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
 import { GameService } from './services/game.service';
 
 @Component({
-  selector: 'app-root',
+  selector: 'goto-root',
   imports: [
     // Game deck components
     DeckControlComponent,

@@ -18,10 +18,10 @@ public class PlayerServiceImpl implements PlayerService {
     private final PlayerRepository playerRepository;
 
     @Override
-    public void addToGame(Long playerId, GameEntity game) {
+    public PlayerEntity addToGame(Long playerId, GameEntity game) {
         final var player = playerRepository.findById(playerId).orElseThrow(() -> new EntityNotFoundException("Player with id %s not found".formatted(playerId)));
         player.setGame(game);
-        playerRepository.save(player);
+        return playerRepository.save(player);
     }
 
     @Override

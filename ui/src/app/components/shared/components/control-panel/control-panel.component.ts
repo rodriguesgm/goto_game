@@ -7,7 +7,7 @@ export interface ControlButton {
 }
 
 @Component({
-  selector: 'app-control-panel',
+  selector: 'goto-control-panel',
   standalone: true,
   imports: [
     CommonModule

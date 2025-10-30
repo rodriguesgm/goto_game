@@ -3,7 +3,7 @@ import { ControlButton, ControlPanelComponent } from '../../shared/components/co
 import { GameService } from '../../../services/game.service';
 
 @Component({
-  selector: 'game-control',
+  selector: 'goto-game-control',
   standalone: true,
   imports: [
     ControlPanelComponent
@@ -14,14 +14,6 @@ import { GameService } from '../../../services/game.service';
 export class GameControlComponent {
   controlButtons: ControlButton[] = [
     { label: 'Add game', action: 'addGame' },
-    { label: 'Delete game', action: 'deleteGame' },
-    { label: 'Shuffle deck', action: 'shuffleDeck' },
-    { label: 'Remove player', action: 'removePlayer' },
-    { label: 'Deal card', action: 'dealCard' },
-    { label: 'Count suits', action: 'countSuits' },
-    { label: 'See players', action: 'seePlayers' },
-    { label: 'Add deck', action: 'addDeck' },
-    { label: 'Add player', action: 'addPlayer' }
   ];
 
   constructor(private gameService: GameService) {
@@ -33,30 +25,6 @@ export class GameControlComponent {
       case 'addGame':
         this.addGame();
         break;
-      case 'deleteGame':
-        this.deleteGame();
-        break;
-      case 'shuffleDeck':
-        this.shuffleDeck();
-        break;
-      case 'removePlayer':
-        this.removePlayer();
-        break;
-      case 'dealCard':
-        this.dealCard();
-        break;
-      case 'countSuits':
-        this.countSuits();
-        break;
-      case 'seePlayers':
-        this.seePlayers();
-        break;
-      case 'addDeck':
-        this.addDeck();
-        break;
-      case 'addPlayer':
-        this.addPlayer();
-        break;
       default:
         throw new Error('Action not implmeneted: ' + action);
     }
@@ -67,13 +35,4 @@ export class GameControlComponent {
     const gameSeq = Math.floor(Math.random() * (1000 - 1)) + 1;
     this.gameService.create({ name: 'Game ' + gameSeq }).subscribe(t => console.log(t));
   }
-
-  private deleteGame() { console.log('Delete game'); }
-  private shuffleDeck() { console.log('Shuffle deck'); }
-  private removePlayer() { console.log('Remove player'); }
-  private dealCard() { console.log('Deal card'); }
-  private countSuits() { console.log('Count suits'); }
-  private seePlayers() { console.log('See players'); }
-  private addDeck() { console.log('Add deck to game'); }
-  private addPlayer() { console.log('Add player to game'); }
 }

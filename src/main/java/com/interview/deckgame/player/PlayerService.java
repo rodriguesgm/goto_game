@@ -6,7 +6,7 @@ import com.interview.deckgame.game.internal.GameEntity;
 import com.interview.deckgame.player.internal.PlayerEntity;
 
 public interface PlayerService {
-    void addToGame(Long playerId, GameEntity game);
+    PlayerEntity addToGame(Long playerId, GameEntity game);
 
     void removeFromGame(Long playerId, GameEntity game);
 
