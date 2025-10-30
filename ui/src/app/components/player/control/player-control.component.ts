@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ControlButton, ControlPanelComponent } from '../../shared/components/control-panel/control-panel.component';
+import { PlayerService } from '../../../services/player.service';
 
 @Component({
   selector: 'goto-player-control',
@@ -16,6 +17,8 @@ export class PlayerControlComponent {
     { label: 'See cards', action: 'seeCards' }
   ];
 
+  constructor(private playerService: PlayerService) { }
+
   onControlAction(action: string) {
     switch (action) {
       case 'addPlayer':
@@ -29,6 +32,11 @@ export class PlayerControlComponent {
     }
   }
 
-  private addPlayer() { console.log('Add player'); }
+  private addPlayer() {
+    // TODO: goto: Should open a modal to get player name
+    const playerSeq = Math.floor(Math.random() * (10000 - 1)) + 1;
+    this.playerService.create({ name: 'Player ' + playerSeq });
+  }
+
   private seeCards() { console.log('See cards'); }
 }
