@@ -6,13 +6,30 @@ Implementation of a Game deck based on requirements provided.
 
 ## Backend 
 
-This project uses the following technologies in the backend:
+This project uses the following technologies:
 - Java 21 with Spring Boot for building RESTful APIs
 - Maven for dependency management and build automation
 - H2 in-memory database for development and testing
 - MapStruct for object mapping to not expose entities in the rest api
 - Lombok to reduce boilerplate code
 - JPA (Jakarta Persistence API) for ORM and database access
+
+### To run
+
+Just run `DeckGameApplication.java` class. If you don't provide a env var `APP_TOKEN` for the api validations, the default used is `default-token`, which was included just to make easier to test, but in real live, no default should be provided
+
+## Frontend
+
+This project uses the following technologies:
+- Node 22
+
+### To run
+
+```
+nvm use
+npm install
+npm run start
+```
 
 ## BD Diagram
 

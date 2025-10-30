@@ -19,3 +19,10 @@ genereate_erd.py
 *.iml
 *.ipr
 *.java-version
+
+### VS Code ###
+.vscode/
+
+### Misc ###
+*.log
+.DS_Store
