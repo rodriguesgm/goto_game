@@ -15,6 +15,7 @@ import com.interview.deckgame.game.GamePlayerService;
 import com.interview.deckgame.player.PlayerService;
 import com.interview.deckgame.player.internal.PlayerEntity;
 import com.interview.deckgame.shared.CardRank;
+import com.interview.deckgame.shared.EntityNotFoundException;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -40,6 +41,8 @@ public class GamePlayerServiceImpl implements GamePlayerService {
             totals.put(player, sum);
         }
 
+        // TODO: goto: What if the player has no cards? Should they be included with a total of 0? Currently they are not included.
+
         // Sort descending by value
         return totals.entrySet().stream()
                 .sorted(Map.Entry.<PlayerEntity, Integer>comparingByValue().reversed())
@@ -63,7 +66,7 @@ public class GamePlayerServiceImpl implements GamePlayerService {
         }
 
         List<DealtCardEntity> undealt = dealtCardRepository.findByGameIdAndPlayerIsNullOrderByDealOrderAsc(gameId);
-        PlayerEntity player = playerService.findById(playerId).orElseThrow();
+        PlayerEntity player = playerService.findById(playerId).orElseThrow(() -> new EntityNotFoundException("Player with id %s not found".formatted(playerId)));
 
         // I think we could put this limit in the query itself, but for simplicity doing it here
         List<DealtCardEntity> toDeal = undealt.stream().limit(count).toList();
@@ -81,12 +84,12 @@ public class GamePlayerServiceImpl implements GamePlayerService {
     public void addPlayer(Long gameId, Long playerId) {
         // TODO: goto: validate if player is already added to a game
 
-        GameEntity game = gameRepository.findById(gameId).orElseThrow();
+        GameEntity game = gameRepository.findById(gameId).orElseThrow(() -> new EntityNotFoundException("Game with id %s not found".formatted(playerId)));
         playerService.addToGame(playerId, game);
     }
 
     public void removePlayer(Long gameId, Long playerId) {
-        GameEntity game = gameRepository.findById(gameId).orElseThrow();
+        GameEntity game = gameRepository.findById(gameId).orElseThrow(() -> new EntityNotFoundException("Game with id %s not found".formatted(playerId)));
         playerService.removeFromGame(playerId, game);
     }
 

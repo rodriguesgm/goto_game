@@ -26,6 +26,7 @@ This project uses the following technologies in the backend:
    - [x] Error handling: Partially implemented, added some exceptions and validations but that are still some TODOs in the code to be implemented
    - [ ] Rule Validations: Not implemented. Many rules to handle so left some TODOs in the code
    - [ ] Concurrency handling: Not implemented, but basically we could have issues if we call the dealCards in parallel for the same or different users. There is also an issue while shuffiling the deck and dealing cards at the same time. We could use some lock on a game to handle that, or maybe just a @Version on the entity for optimistic locking is enough, anyway, need a little more analyses
+   - [x] Database: Used H2 just for simplicity, entities are mapped but need to review relationships and constraints more carefully. Also the cascade operations, pretty sure it can cause some weird behaviors.
    - [x] Unit/IT tests: Partially implemented. Added some tests for:
      - Config: ApplicationTokenConfig has a test that is a good example on how we could test spring configuration to make sure all annotations are in the right place and well configured.
      - Controllers: DeckController has a test and it test that is a good example of how we could test controllers using MockMvc to simulate HTTP requests and validate responses.

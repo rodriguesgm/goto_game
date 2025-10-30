@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.interview.deckgame.game.internal.GameEntity;
 import com.interview.deckgame.player.PlayerService;
+import com.interview.deckgame.shared.EntityNotFoundException;
 import com.interview.deckgame.shared.InvalidOperationException;
 
 import lombok.RequiredArgsConstructor;
@@ -18,15 +19,15 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public void addToGame(Long playerId, GameEntity game) {
-        final var player = playerRepository.findById(playerId).orElseThrow();
+        final var player = playerRepository.findById(playerId).orElseThrow(() -> new EntityNotFoundException("Player with id %s not found".formatted(playerId)));
         player.setGame(game);
         playerRepository.save(player);
     }
 
     @Override
     public void removeFromGame(Long playerId, GameEntity game) {
-        final var player = playerRepository.findById(playerId).orElseThrow();
-        if (!player.getGame().getId().equals(game.getId())) {
+        final var player = playerRepository.findById(playerId).orElseThrow(() -> new EntityNotFoundException("Player with id %s not found".formatted(playerId)));
+        if (player.getGame() == null || !player.getGame().getId().equals(game.getId())) {
             throw new InvalidOperationException("Player %s is not part of the game %s".formatted(playerId, game.getId()));
         }
         player.setGame(null);

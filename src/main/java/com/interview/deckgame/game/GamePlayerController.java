@@ -3,6 +3,7 @@ package com.interview.deckgame.game;
 import java.util.List;
 
 import org.apache.commons.lang3.ObjectUtils;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,8 +47,8 @@ public class GamePlayerController {
 
     @GetMapping("/{playerId}/cards/deal")
     @ValidateApplicationToken
-    public List<CardDto> dealCards(@PathVariable Long gameId, @PathVariable Long playerId, @RequestBody DealCardsRequest request) {
-        int numOfCards = ObjectUtils.defaultIfNull(request.numberOfCards(), 1);
+    public List<CardDto> dealCards(@PathVariable Long gameId, @PathVariable Long playerId, @Param("numOfCards") Integer numOfCardsParam) {
+        int numOfCards = ObjectUtils.defaultIfNull(numOfCardsParam, 1);
         return gamePlayerService.dealCards(gameId, playerId, numOfCards).stream()
                 .map(cardMapper::toDto)
                 .toList();
@@ -60,8 +61,5 @@ public class GamePlayerController {
     }
 
     public record AddPlayerRequest(Long playerId) {
-    }
-
-    public record DealCardsRequest(Integer numberOfCards) {
     }
 }
