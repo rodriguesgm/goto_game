@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ControlButton, ControlPanelComponent } from '../../../shared/components/control-panel/control-panel.component';
+import { ControlButton, ControlPanelComponent } from '../../shared/components/control-panel/control-panel.component';
 
 @Component({
   selector: 'game-control',
