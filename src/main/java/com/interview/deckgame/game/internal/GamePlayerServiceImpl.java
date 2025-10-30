@@ -29,20 +29,16 @@ public class GamePlayerServiceImpl implements GamePlayerService {
     private final DealtCardRepository dealtCardRepository;
 
     public Map<PlayerEntity, Integer> getPlayers(Long gameId) {
-        final var playersInGame =
-                dealtCardRepository.findByGameIdAndPlayerIsNotNull(gameId).stream().map(DealtCardEntity::getPlayer).toList();
-
-        Map<PlayerEntity, Integer> totals = new HashMap<>();
+        final var playersInGame = playerService.getPlayers(gameId);
+        final Map<PlayerEntity, Integer> totals = new HashMap<>();
         for (PlayerEntity player : playersInGame) {
+            final var playerCards = dealtCardRepository.findByGameIdAndPlayerId(gameId, player.getId());
             int sum = 0;
-            for (CardEntity c : getPlayerCards(player.getId())) {
-                sum += CardRank.rankFor((c.getValue()));
+            for (DealtCardEntity c : playerCards) {
+                sum += c.getCard().getRankValue();
             }
             totals.put(player, sum);
         }
-
-        // TODO: goto: What if the player has no cards? Should they be included with a total of 0? Currently they are not included.
-
         // Sort descending by value
         return totals.entrySet().stream()
                 .sorted(Map.Entry.<PlayerEntity, Integer>comparingByValue().reversed())

@@ -1,5 +1,6 @@
 package com.interview.deckgame.player;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.interview.deckgame.game.internal.GameEntity;
@@ -11,4 +12,6 @@ public interface PlayerService {
     void removeFromGame(Long playerId, GameEntity game);
 
     Optional<PlayerEntity> findById(Long playerId);
+
+    List<PlayerEntity> getPlayers(Long gameId);
 }

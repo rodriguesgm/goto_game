@@ -1,5 +1,6 @@
 package com.interview.deckgame.player.internal;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -16,6 +17,10 @@ import lombok.RequiredArgsConstructor;
 public class PlayerServiceImpl implements PlayerService {
 
     private final PlayerRepository playerRepository;
+
+    public List<PlayerEntity> getPlayers(Long gameId) {
+        return playerRepository.findByGameId(gameId);
+    }
 
     @Override
     public PlayerEntity addToGame(Long playerId, GameEntity game) {

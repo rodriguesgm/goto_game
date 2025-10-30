@@ -130,7 +130,7 @@ export class GameTableComponent {
 
   private listPlayers() {
     this.gamePlayerService.listGamePlayers(this._game.id).subscribe(result => {
-      this.players = result
+      this.players = result.sort((p1, p2) => p1.playerName.localeCompare(p2.playerName));
     });
   }
 }

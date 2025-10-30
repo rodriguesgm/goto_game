@@ -1,5 +1,5 @@
 export interface GamePlayer {
   playerId: number;
-  playerName: String;
+  playerName: string;
   score: number;
 }
