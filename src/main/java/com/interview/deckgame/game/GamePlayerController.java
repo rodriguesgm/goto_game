@@ -48,10 +48,10 @@ public class GamePlayerController {
         );
     }
 
-    @GetMapping("/{playerId}/cards/deal")
+    @PostMapping("/{playerId}/cards/deal")
     @ValidateApplicationToken
-    public List<CardDto> dealCards(@PathVariable Long gameId, @PathVariable Long playerId, @Param("numOfCards") Integer numOfCardsParam) {
-        int numOfCards = ObjectUtils.defaultIfNull(numOfCardsParam, 1);
+    public List<CardDto> dealCards(@PathVariable Long gameId, @PathVariable Long playerId, @RequestBody DealCardRequest request) {
+        int numOfCards = ObjectUtils.defaultIfNull(request.numOfCardsParam, 1);
         return gamePlayerService.dealCards(gameId, playerId, numOfCards).stream()
                 .map(cardMapper::toDto)
                 .toList();
@@ -64,5 +64,8 @@ public class GamePlayerController {
     }
 
     public record AddPlayerRequest(Long playerId) {
+    }
+
+    public record DealCardRequest(Integer numOfCardsParam) {
     }
 }

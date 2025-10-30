@@ -40,7 +40,7 @@ export class GameTableComponent {
   set game(value: Game) {
     this._game = value;
 
-    this.listPlayers(value);
+    this.listPlayers();
   }
 
   get game(): Game {
@@ -82,8 +82,34 @@ export class GameTableComponent {
     this.gameDeckService.shuffleDeck(this._game.id).subscribe(() => console.log('Decks shuffled'));
   }
 
-  private removePlayer() { console.log('Remove player'); }
-  private dealCard() { console.log('Deal card'); }
+  private removePlayer() {
+    // TODO: goto: better modal input
+    const result = window.prompt('Please enter the player id:');
+    if (result !== null && result.trim() !== '') {
+      let idToRemove = Number(result);
+      this.gamePlayerService.removePlayer(this._game.id, Number(result)).subscribe(() => {
+        const index = this.players.findIndex(p => p.playerId === idToRemove);
+
+        if (index !== -1) {
+          this.players = [...this.players.slice(0, index), ...this.players.slice(index + 1)];
+        }
+      });
+    }
+  }
+
+  private dealCard() {
+    // TODO: goto: better modal input
+    const result = window.prompt('Please enter the player id:');
+    if (result !== null && result.trim() !== '') {
+      let idToRemove = Number(result);
+      this.gamePlayerService.dealCardsPlayer(this._game.id, Number(result)).subscribe(() => {
+        // reload the whole list to have the latest score of the user that receive the card
+        // TODO: goto: go just reload the user
+        this.listPlayers();
+      });
+    }
+  }
+
   private countSuits() { console.log('Count suits'); }
 
   private addDeck() {
@@ -102,7 +128,7 @@ export class GameTableComponent {
     }
   }
 
-  private listPlayers(name: Game) {
+  private listPlayers() {
     this.gamePlayerService.listGamePlayers(this._game.id).subscribe(result => {
       this.players = result
     });

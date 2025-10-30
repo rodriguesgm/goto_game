@@ -13,9 +13,19 @@ export class GamePlayerService extends BaseApiService {
     return this.get<GamePlayer[]>(`games/${gameId}/players`);
   }
 
+  dealCardsPlayer(gameId: number, playerId: number): Observable<GamePlayer> {
+    return this.post<GamePlayer>(`games/${gameId}/players/${playerId}/cards/deal`, {
+      numOfCardsParam: 1,
+    });
+  }
+
   addPlayer(gameId: number, playerId: number): Observable<GamePlayer> {
     return this.post<GamePlayer>(`games/${gameId}/players`, {
       playerId,
     });
+  }
+
+  removePlayer(gameId: number, playerId: number): Observable<GamePlayer> {
+    return this.delete<GamePlayer>(`games/${gameId}/players/${playerId}`);
   }
 }

@@ -14,5 +14,6 @@ public interface GameMapper {
     GameDto toDto(GameEntity gameEntity);
 
     @Mapping(target = "playerName", source = "player.name")
+    @Mapping(target = "playerId", source = "player.id")
     PlayerScoreDto toPlayerScoreDto(PlayerEntity player, Integer score);
 }
