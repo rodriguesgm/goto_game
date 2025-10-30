@@ -26,6 +26,7 @@ public class PlayerServiceImpl implements PlayerService {
     public void removeFromGame(Long playerId, GameEntity game) {
         final var player = playerRepository.findById(playerId).orElseThrow();
         if (!player.getGame().getId().equals(game.getId())) {
+            // TODO = Should throw the correct exception to be handled
             throw new IllegalStateException("Player is not part of the specified game");
         }
         player.setGame(null);
