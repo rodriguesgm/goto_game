@@ -37,7 +37,7 @@ public class GameDeckController {
         gameDeckService.shuffle(gameId);
     }
 
-    // TODO = irc, the rest endpoint path in here is kind of weird, not really Rest Standards compliant
+    // TODO: goto: irc, the rest endpoint path in here is kind of weird, not really Rest Standards compliant
     @ValidateApplicationToken
     @GetMapping("/cards/suit-counts")
     public Map<CardEntity.Suit, Long> suitCounts(@PathVariable Long gameId) {

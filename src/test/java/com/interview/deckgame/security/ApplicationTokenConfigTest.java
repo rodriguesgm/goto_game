@@ -1,7 +1,5 @@
 package com.interview.deckgame.security;
 
-import java.util.Set;
-
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +13,7 @@ class ApplicationTokenConfigTest implements WithAssertions {
     private ApplicationContextRunner runner;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         runner = new ApplicationContextRunner()
                 .withPropertyValues("goto.application-token=game-deck")
                 .withBean(HttpServletRequest.class, MockHttpServletRequest::new)
@@ -23,7 +21,7 @@ class ApplicationTokenConfigTest implements WithAssertions {
     }
 
     @Test
-    public void testValidateApplicationTokenAspectBean() {
+    void testValidateApplicationTokenAspectBean() {
         runner.run(context -> {
             assertThat(context.getBean("validateApplicationTokenAspect")).isInstanceOfSatisfying(ValidateApplicationTokenAspect.class, aspect -> {
                 assertThat(aspect).extracting("applicationToken").isInstanceOfSatisfying(String.class, token -> {

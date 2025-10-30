@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.interview.deckgame.deck.DeckService;
 import com.interview.deckgame.deck.internal.CardEntity;
+import com.interview.deckgame.shared.EntityNotFoundException;
+import com.interview.deckgame.shared.InvalidOperationException;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -27,12 +29,11 @@ public class GameDeckService {
     public GameEntity addDeck(Long gameId, Long deckId) {
         var gameDeckOpt = gameDeckRepository.findByGameIdAndDeckId(gameId, deckId);
         if (gameDeckOpt.isPresent()) {
-            // TODO = Should throw the correct exception to be handled
-            throw new IllegalStateException("Deck is already associated with the game");
+            throw new InvalidOperationException("Deck %s is already associated with the game %s".formatted(deckId, gameId));
         }
 
-        final var game = gameRepository.findById(gameId).orElseThrow(() -> new IllegalArgumentException("Game not found"));
-        final var deck = deckService.getDeckById(deckId).orElseThrow(() -> new IllegalArgumentException("Deck not found"));
+        final var game = gameRepository.findById(gameId).orElseThrow(() -> new EntityNotFoundException("Game %s not found".formatted(gameId)));
+        final var deck = deckService.getDeckById(deckId).orElseThrow(() -> new EntityNotFoundException("Deck %s not found".formatted(deckId)));
 
         final var totalDecks = gameDeckRepository.countByGameId(gameId);
 

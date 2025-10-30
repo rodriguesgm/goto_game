@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.interview.deckgame.game.internal.GameEntity;
 import com.interview.deckgame.player.PlayerService;
+import com.interview.deckgame.shared.InvalidOperationException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -26,8 +27,7 @@ public class PlayerServiceImpl implements PlayerService {
     public void removeFromGame(Long playerId, GameEntity game) {
         final var player = playerRepository.findById(playerId).orElseThrow();
         if (!player.getGame().getId().equals(game.getId())) {
-            // TODO = Should throw the correct exception to be handled
-            throw new IllegalStateException("Player is not part of the specified game");
+            throw new InvalidOperationException("Player %s is not part of the game %s".formatted(playerId, game.getId()));
         }
         player.setGame(null);
         playerRepository.save(player);
