@@ -2,7 +2,7 @@
 
 ## Description
 
-Implementation of a Game deck based on requirements provided.
+Implementation of a Game deck based on requirements provided. In this project there is the backend and front end that could be run together for test.
 
 ## Backend 
 
@@ -18,6 +18,11 @@ This project uses the following technologies:
 
 Just run `DeckGameApplication.java` class. If you don't provide a env var `APP_TOKEN` for the api validations, the default used is `default-token`, which was included just to make easier to test, but in real live, no default should be provided
 
+
+Go to `http://localhost:8080/swagger-ui/index.html` for Swagger api to call endpoints
+
+Go to `http://localhost:8080/h2-console/login.do` for in memory DB ui and see the data
+
 ## Frontend
 
 This project uses the following technologies:
@@ -31,6 +36,8 @@ nvm use
 npm install
 npm run start
 ```
+
+Go to `http://localhost:4200` to play with the app
 
 ## BD Diagram
 
