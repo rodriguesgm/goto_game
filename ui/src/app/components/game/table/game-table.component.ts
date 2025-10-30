@@ -7,6 +7,7 @@ import { ControlButton, ControlPanelComponent } from '../../shared/components/co
 import { GameDeckService } from '../../../services/game-deck.service';
 import { GameService } from '../../../services/game.service';
 import { PlayerService } from '../../../services/player.service';
+import { CardSuit } from '../../../models/card.model';
 
 @Component({
   selector: 'goto-game-table',
@@ -125,7 +126,11 @@ export class GameTableComponent {
     }
   }
 
-  private countSuits() { console.log('Count suits'); }
+  private countSuits() {
+    this.gameDeckService.countSuits(this._game.id).subscribe((cards) => {
+      window.alert('Cards suits status:\n\n' + Object.keys(cards).map(suit => `${suit}: ${cards[suit as CardSuit]}`).join('\n'));
+    });
+  }
 
   private addDeck() {
     // TODO: goto: better modal input

@@ -13,7 +13,7 @@ import { GameService } from '../../../services/game.service';
 })
 export class GameControlComponent {
   controlButtons: ControlButton[] = [
-    { label: 'Add game', action: 'addGame' },
+    { label: 'Add', action: 'addGame' },
   ];
 
   constructor(private gameService: GameService) {

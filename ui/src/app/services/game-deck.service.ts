@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BaseApiService } from './base-api.service';
+import { CardSuit } from '../models/card.model';
 
 
 @Injectable({
@@ -12,6 +13,10 @@ export class GameDeckService extends BaseApiService {
     return this.post<void>(`games/${gameId}/decks`, {
       deckId,
     });
+  }
+
+  countSuits(gameId: number): Observable<Record<CardSuit, number>> {
+    return this.get<Record<CardSuit, number>>(`games/${gameId}/decks/cards/suit-counts`);
   }
 
   shuffleDeck(gameId: number): Observable<void> {

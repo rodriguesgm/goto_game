@@ -1,5 +1,7 @@
+export type CardSuit = 'HEARTS' | 'SPADES' | 'CLUBS' | 'DIAMONDS';
+
 export interface Card {
   id: number;
-  suit: string;
+  suit: CardSuit;
   value: string;
 }
