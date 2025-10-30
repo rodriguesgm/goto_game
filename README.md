@@ -36,6 +36,15 @@ npm run start
 
 ![Game Logo](game_erd.png)
 
+## AI Usage
+
+Lot of code to be generated for this challenge in a short period of time, so AI is a good help on those cases since the boilerplate code is pretty much the same. Used ChatGPT to generate a good part of this code where I reviewed them and changed to better fit the structure I wanted or to fix some issues.
+
+Even for the UI, started doing a mockup of what I wanted and asked ChatGpt to generate the code for me, than got the code and adpted on the project
+
+![UI AI](ui-generated.jpg)
+
+
 ## Checklist
 
  - [x] API backend
