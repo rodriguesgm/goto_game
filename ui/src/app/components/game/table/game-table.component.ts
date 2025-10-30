@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { ControlButton, ControlPanelComponent } from '../../shared/components/control-panel/control-panel.component';
 import { GameDeckService } from '../../../services/game-deck.service';
 import { GameService } from '../../../services/game.service';
+import { PlayerService } from '../../../services/player.service';
 
 @Component({
   selector: 'goto-game-table',
@@ -39,6 +40,7 @@ export class GameTableComponent {
     private gamePlayerService: GamePlayerService,
     private gameDeckService: GameDeckService,
     private gameService: GameService,
+    private playerService: PlayerService,
   ) { }
 
   @Input({ required: true })
@@ -79,6 +81,12 @@ export class GameTableComponent {
       default:
         throw new Error('Action not implmeneted: ' + action);
     }
+  }
+
+  seeCards(playerId: number) {
+    this.playerService.getCards(playerId).subscribe((cards) => {
+      window.alert('Players cards:\n\n' + cards.map(c => `${c.value} of ${c.suit}`).join('\n'));
+    });
   }
 
   private deleteGame() {

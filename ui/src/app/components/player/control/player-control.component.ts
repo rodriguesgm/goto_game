@@ -14,7 +14,6 @@ import { PlayerService } from '../../../services/player.service';
 export class PlayerControlComponent {
   controlButtons: ControlButton[] = [
     { label: 'Add', action: 'addPlayer' },
-    { label: 'See cards', action: 'seeCards' }
   ];
 
   constructor(private playerService: PlayerService) { }
@@ -23,9 +22,6 @@ export class PlayerControlComponent {
     switch (action) {
       case 'addPlayer':
         this.addPlayer()
-        break;
-      case 'seeCards':
-        this.seeCards()
         break;
       default:
         throw new Error('Action not implmeneted: ' + action);
@@ -38,5 +34,4 @@ export class PlayerControlComponent {
     this.playerService.create({ name: 'Player ' + playerSeq }).subscribe(t => console.log(t));;
   }
 
-  private seeCards() { console.log('See cards'); }
 }

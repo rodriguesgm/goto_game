@@ -11,7 +11,7 @@
       </div>
 
       <div class="players">
-        <div class="player" *ngFor="let player of players">
+        <div class="player" *ngFor="let player of players" (click)="seeCards(player.playerId)">
           {{player.playerName}} ({{player.score}})
         </div>
       </div>
