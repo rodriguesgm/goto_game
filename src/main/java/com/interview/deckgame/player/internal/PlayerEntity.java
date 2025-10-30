@@ -3,6 +3,8 @@ package com.interview.deckgame.player.internal;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.builder.ToStringExclude;
+
 import com.interview.deckgame.game.internal.DealtCardEntity;
 import com.interview.deckgame.game.internal.GameEntity;
 
@@ -27,8 +29,25 @@ public class PlayerEntity {
     private String name;
 
     @ManyToOne
+    @ToStringExclude
     private GameEntity game;
 
     @OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
+    @ToStringExclude
     private List<DealtCardEntity> dealtCards = new ArrayList<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (!(o instanceof PlayerEntity other))
+            return false;
+
+        return id != null && id.equals(other.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }
