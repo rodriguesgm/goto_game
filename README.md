@@ -44,6 +44,7 @@ Even for the UI, started doing a mockup of what I wanted and asked ChatGpt to ge
 
 ![UI AI](ui-generated.jpg)
 
+For the DB diagram, presented the ChatGpt my entities and asked for a DB diagram which resulted in a python script to generate it (pretty nice).
 
 ## Checklist
 
