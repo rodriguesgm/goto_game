@@ -14,7 +14,17 @@ This project uses the following technologies in the backend:
 - Lombok to reduce boilerplate code
 - JPA (Jakarta Persistence API) for ORM and database access
 
-
 ## BD Diagram
 
 ![Game Logo](game_erd.png)
+
+## Checklist
+
+ - [ ] API endpoints implementation
+   - [ ] Logic for the games
+   - [ ] Security
+   - [ ] Unit tests
+   - [ ] Integration tests
+ - [ ] Frontend
+   - [ ] Views
+   - [ ] Tests
