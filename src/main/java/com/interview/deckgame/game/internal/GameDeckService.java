@@ -32,8 +32,10 @@ public class GameDeckService {
             throw new InvalidOperationException("Deck %s is already associated with the game %s".formatted(deckId, gameId));
         }
 
-        final var game = gameRepository.findById(gameId).orElseThrow(() -> new EntityNotFoundException("Game %s not found".formatted(gameId)));
-        final var deck = deckService.getDeckById(deckId).orElseThrow(() -> new EntityNotFoundException("Deck %s not found".formatted(deckId)));
+        final var game =
+                gameRepository.findById(gameId).orElseThrow(() -> new EntityNotFoundException("Game %s not found".formatted(gameId)));
+        final var deck =
+                deckService.getDeckById(deckId).orElseThrow(() -> new EntityNotFoundException("Deck %s not found".formatted(deckId)));
 
         final var totalDecks = gameDeckRepository.countByGameId(gameId);
 

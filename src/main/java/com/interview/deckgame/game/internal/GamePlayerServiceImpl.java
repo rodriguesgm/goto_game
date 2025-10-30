@@ -14,7 +14,6 @@ import com.interview.deckgame.deck.internal.CardEntity;
 import com.interview.deckgame.game.GamePlayerService;
 import com.interview.deckgame.player.PlayerService;
 import com.interview.deckgame.player.internal.PlayerEntity;
-import com.interview.deckgame.shared.CardRank;
 import com.interview.deckgame.shared.EntityNotFoundException;
 
 import jakarta.transaction.Transactional;
@@ -62,7 +61,8 @@ public class GamePlayerServiceImpl implements GamePlayerService {
         }
 
         List<DealtCardEntity> undealt = dealtCardRepository.findByGameIdAndPlayerIsNullOrderByDealOrderAsc(gameId);
-        PlayerEntity player = playerService.findById(playerId).orElseThrow(() -> new EntityNotFoundException("Player with id %s not found".formatted(playerId)));
+        PlayerEntity player = playerService.findById(playerId)
+                .orElseThrow(() -> new EntityNotFoundException("Player with id %s not found".formatted(playerId)));
 
         // I think we could put this limit in the query itself, but for simplicity doing it here
         List<DealtCardEntity> toDeal = undealt.stream().limit(count).toList();
@@ -80,12 +80,14 @@ public class GamePlayerServiceImpl implements GamePlayerService {
     public PlayerEntity addPlayer(Long gameId, Long playerId) {
         // TODO: goto: validate if player is already added to a game
 
-        GameEntity game = gameRepository.findById(gameId).orElseThrow(() -> new EntityNotFoundException("Game with id %s not found".formatted(playerId)));
+        GameEntity game = gameRepository.findById(gameId)
+                .orElseThrow(() -> new EntityNotFoundException("Game with id %s not found".formatted(playerId)));
         return playerService.addToGame(playerId, game);
     }
 
     public void removePlayer(Long gameId, Long playerId) {
-        GameEntity game = gameRepository.findById(gameId).orElseThrow(() -> new EntityNotFoundException("Game with id %s not found".formatted(playerId)));
+        GameEntity game = gameRepository.findById(gameId)
+                .orElseThrow(() -> new EntityNotFoundException("Game with id %s not found".formatted(playerId)));
         playerService.removeFromGame(playerId, game);
     }
 

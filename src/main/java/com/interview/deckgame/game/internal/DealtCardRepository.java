@@ -11,5 +11,5 @@ interface DealtCardRepository extends CrudRepository<DealtCardEntity, Long> {
 
     List<DealtCardEntity> findByPlayerId(Long playerId);
 
-    List<DealtCardEntity>  findByGameIdAndPlayerId(Long gameId, Long playerId);
+    List<DealtCardEntity> findByGameIdAndPlayerId(Long gameId, Long playerId);
 }

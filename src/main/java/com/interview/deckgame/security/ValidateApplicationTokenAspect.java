@@ -20,7 +20,8 @@ public class ValidateApplicationTokenAspect {
 
     @Before("@annotation(com.interview.deckgame.security.ValidateApplicationToken)")
     public void validateApplicationToken() {
-        if (request.getHeader(APPLICATION_TOKEN_HEADER_ID) == null || !this.applicationToken.equals(request.getHeader(APPLICATION_TOKEN_HEADER_ID))) {
+        if (request.getHeader(APPLICATION_TOKEN_HEADER_ID) == null || !this.applicationToken.equals(
+                request.getHeader(APPLICATION_TOKEN_HEADER_ID))) {
             throw new UnknownApplicationTokenException("Invalid application token");
         }
     }

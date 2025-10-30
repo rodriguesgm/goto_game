@@ -27,10 +27,9 @@ public class CardEntity {
 
     private Integer rankValue;
 
-    @Column(name="number_value")
+    @Column(name = "number_value")
     @Enumerated(EnumType.STRING)
     private Value value;
-
 
     public enum Suit {HEARTS, SPADES, CLUBS, DIAMONDS}
 
