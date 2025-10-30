@@ -22,6 +22,7 @@ Just run `DeckGameApplication.java` class. If you don't provide a env var `APP_T
 
 This project uses the following technologies:
 - Node 22
+- Angular 19
 
 ### To run
 
@@ -50,9 +51,9 @@ npm run start
      - Config: ApplicationTokenConfig has a test that is a good example on how we could test spring configuration to make sure all annotations are in the right place and well configured.
      - Controllers: DeckController has a test and it test that is a good example of how we could test controllers using MockMvc to simulate HTTP requests and validate responses.
      - Services and others: Not implemented but definitely need to be done.
- - [ ] Frontend
-   - [ ] Views
+ - [x] Frontend
+   - [x] Views
    - [ ] Tests
-   - [ ] Translations/I18n
-   - [ ] Error handling and message
+   - [ ] Translations/I18n: I won't have time to do it but could integrate a lib with angular that extract the text automatically and put in a en.json file that we could export to Transifex or something like that to get translated and then pulled back to some place were we can fetch and add to the project or dinamically load it.
+   - [ ] Error handling and message: No time to this one too, so if operations fails, just check Chrome debug to see the request response. 
   
