@@ -28,6 +28,7 @@ Go to `http://localhost:8080/h2-console/login.do` for in memory DB ui and see th
 This project uses the following technologies:
 - Node 22
 - Angular 19
+- Tests with Karma (standard for Angular)
 
 ### To run
 
