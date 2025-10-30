@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 public class DeckServiceImpl implements DeckService {
 
     private final DeckRepository deckRepository;
-    private final DeckCardRepository cardRepository;
+    private final CardRepository cardRepository;
 
     @Transactional
     public DeckEntity newDeck(String name) {

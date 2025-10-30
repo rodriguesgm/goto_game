@@ -21,6 +21,7 @@ public class GameService {
     }
 
     public void delete(Long gameId) {
+        // TODO: goto: Game has a status, maybe we should just soft delete it?
         gameRepository.deleteById(gameId);
     }
 
