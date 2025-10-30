@@ -23,7 +23,7 @@
           </button>
 
           <div *ngFor="let game of games">
-            <goto-game-table [game]="game"></goto-game-table>
+            <goto-game-table [game]="game" (gameClosed)="removeGame($event)"></goto-game-table>
           </div>
 
         </div>

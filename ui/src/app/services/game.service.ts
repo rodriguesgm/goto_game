@@ -12,6 +12,10 @@ export class GameService extends BaseApiService {
     return this.post<Game>('games', payload);
   }
 
+  close(gameId: number): Observable<void> {
+    return this.delete<void>(`games/${gameId}`);
+  }
+
   list(): Observable<Game[]> {
     return this.get<Game[]>('games');
   }

@@ -34,4 +34,12 @@ export class AppComponent {
   reloadTables() {
     this.gameService.list().subscribe(result => this.games = result);
   }
+
+  removeGame(gameIds: number) {
+    const index = this.games.findIndex(p => p.id === gameIds);
+
+    if (index !== -1) {
+      this.games = [...this.games.slice(0, index), ...this.games.slice(index + 1)];
+    }
+  }
 }

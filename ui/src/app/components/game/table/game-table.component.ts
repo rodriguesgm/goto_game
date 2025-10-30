@@ -1,10 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Game } from '../../../models/game.model';
 import { GamePlayerService } from '../../../services/game-player.service';
 import { GamePlayer } from '../../../models/game-player.model';
 import { CommonModule } from '@angular/common';
 import { ControlButton, ControlPanelComponent } from '../../shared/components/control-panel/control-panel.component';
 import { GameDeckService } from '../../../services/game-deck.service';
+import { GameService } from '../../../services/game.service';
 
 @Component({
   selector: 'goto-game-table',
@@ -18,8 +19,11 @@ import { GameDeckService } from '../../../services/game-deck.service';
 })
 export class GameTableComponent {
 
+  @Output() gameClosed = new EventEmitter<number>();
+
   _game!: Game;
   players: GamePlayer[] = [];
+
   controlButtons: ControlButton[] = [
     { label: 'Add deck', action: 'addDeck' },
     { label: 'Add player', action: 'addPlayer' },
@@ -34,6 +38,7 @@ export class GameTableComponent {
   constructor(
     private gamePlayerService: GamePlayerService,
     private gameDeckService: GameDeckService,
+    private gameService: GameService,
   ) { }
 
   @Input({ required: true })
@@ -76,7 +81,9 @@ export class GameTableComponent {
     }
   }
 
-  private deleteGame() { console.log('Delete game'); }
+  private deleteGame() {
+    this.gameService.close(this._game.id).subscribe(() => this.gameClosed.emit(this._game.id));
+  }
 
   private shuffleDeck() {
     this.gameDeckService.shuffleDeck(this._game.id).subscribe(() => console.log('Decks shuffled'));
