@@ -1,6 +1,8 @@
 package com.interview.deckgame.game.internal;
 
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import org.springframework.stereotype.Service;
@@ -71,4 +73,12 @@ public class GameDeckService {
         dealtCardRepository.saveAll(undealt);
     }
 
+    public Map<CardEntity.Suit, Long> countRemainingBySuit(Long gameId) {
+        final var undealt = dealtCardRepository.findByGameIdAndPlayerIsNull(gameId);
+        final Map<CardEntity.Suit, Long> counts = new EnumMap<>(CardEntity.Suit.class);
+        for (CardEntity.Suit suit : CardEntity.Suit.values()) {
+            counts.put(suit, undealt.stream().filter(dc -> dc.getCard().getSuit() == suit).count());
+        }
+        return counts;
+    }
 }
