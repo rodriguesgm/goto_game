@@ -23,6 +23,8 @@ This project uses the following technologies in the backend:
  - [ ] API endpoints implementation
    - [ ] Logic for the games
    - [ ] Security
+   - [ ] Error handling
+   - [ ] Rule Validations
    - [ ] Unit tests
    - [ ] Integration tests
  - [ ] Frontend
