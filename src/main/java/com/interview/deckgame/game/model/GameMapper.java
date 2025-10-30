@@ -11,7 +11,6 @@ import com.interview.deckgame.player.internal.PlayerEntity;
 public interface GameMapper {
 
     @Mapping(target = "id")
-    @Mapping(target = "name")
     GameDto toDto(GameEntity gameEntity);
 
     @Mapping(target = "playerName", source = "player.name")
