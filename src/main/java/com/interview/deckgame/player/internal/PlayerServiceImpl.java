@@ -24,16 +24,14 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public PlayerEntity addToGame(Long playerId, GameEntity game) {
-        final var player = playerRepository.findById(playerId)
-                .orElseThrow(() -> new EntityNotFoundException("Player with id %s not found".formatted(playerId)));
+        final var player = playerRepository.findById(playerId).orElseThrow(() -> new EntityNotFoundException("Player with id %s not found".formatted(playerId)));
         player.setGame(game);
         return playerRepository.save(player);
     }
 
     @Override
     public void removeFromGame(Long playerId, GameEntity game) {
-        final var player = playerRepository.findById(playerId)
-                .orElseThrow(() -> new EntityNotFoundException("Player with id %s not found".formatted(playerId)));
+        final var player = playerRepository.findById(playerId).orElseThrow(() -> new EntityNotFoundException("Player with id %s not found".formatted(playerId)));
         if (player.getGame() == null || !player.getGame().getId().equals(game.getId())) {
             throw new InvalidOperationException("Player %s is not part of the game %s".formatted(playerId, game.getId()));
         }

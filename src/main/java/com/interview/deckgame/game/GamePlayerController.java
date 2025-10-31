@@ -3,6 +3,7 @@ package com.interview.deckgame.game;
 import java.util.List;
 
 import org.apache.commons.lang3.ObjectUtils;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,8 +43,8 @@ public class GamePlayerController {
     @ValidateApplicationToken
     public PlayerScoreDto addPlayer(@PathVariable Long gameId, @RequestBody AddPlayerRequest request) {
         return gameMapper.toPlayerScoreDto(
-                gamePlayerService.addPlayer(gameId, request.playerId()),
-                0
+            gamePlayerService.addPlayer(gameId, request.playerId()),
+            0
         );
     }
 

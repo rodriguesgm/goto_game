@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-interface PlayerRepository extends CrudRepository<PlayerEntity, Long> {
+ interface PlayerRepository extends CrudRepository<PlayerEntity, Long> {
 
-    List<PlayerEntity> findByGameId(Long gameId);
+     List<PlayerEntity> findByGameId(Long gameId);
 }
